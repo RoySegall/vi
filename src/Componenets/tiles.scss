@@ -1,0 +1,19 @@
+.tiles {
+  display: grid;
+  grid-template-columns: auto auto auto auto;
+  grid-column-gap: 10px;
+  grid-row-gap: 10px;
+  width: 25vw;
+  margin: 0 auto;
+
+  .tile {
+    text-align: center;
+    padding: 1em;
+    background: orange;
+
+    &.disabled {
+      background: white;
+      border: orange solid 1px;
+    }
+  }
+}
