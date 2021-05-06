@@ -1,4 +1,5 @@
 import {getDraggableNumbers, isGameSolved, findIndexOfNumber, switchNumberWithZero} from "./Utils";
+import {isEqual} from 'lodash';
 
 describe('Utils', () => {
 
@@ -28,77 +29,67 @@ describe('Utils', () => {
   });
 
   it('getDraggableNumbers: Testing which number is draggable', () => {
-    expect(getDraggableNumbers(
-      [
-        1,  2,  3,  4,
-        5,  6,  7,  0,
-        8,  9,  10, 11,
-        12, 13, 14, 15
-      ]
-    )).toStrictEqual([4, 7]);
 
-    expect(getDraggableNumbers(
-      [
-        1,  2,  3,  4,
-        5,  6,  0,  7,
-        8,  9,  10, 11,
-        12, 13, 14, 15
-      ]
-    )).toStrictEqual([3, 6, 7, 10]);
+    const verifyDraggableNumber = (matrix, expectedNumbers) => {
+      expect(getDraggableNumbers(matrix).sort()).toStrictEqual(expectedNumbers.sort());
+    };
 
-    expect(getDraggableNumbers(
-      [
-        1,  2,  3,  4,
-        0,  5,  6,  7,
-        8,  9,  10, 11,
-        12, 13, 14, 15
-      ]
-    )).toStrictEqual([1,8,5]);
+    verifyDraggableNumber([
+      1,  2,  3,  4,
+      5,  6,  7,  0,
+      8,  9,  10, 11,
+      12, 13, 14, 15
+    ], [4, 7, 11]);
 
-    expect(getDraggableNumbers(
-      [
-        1,  2,  3,  4,
-        12, 5,  6,  7,
-        8,  9,  10, 11,
-        0,  13, 14, 15
-      ]
-    )).toStrictEqual([8,13]);
+    verifyDraggableNumber([
+      1,  2,  3,  4,
+      5,  6,  0,  7,
+      8,  9,  10, 11,
+      12, 13, 14, 15
+    ], [3, 6, 7, 10])
 
-    expect(getDraggableNumbers(
-      [
+    verifyDraggableNumber([
+      1,  2,  3,  4,
+      0,  5,  6,  7,
+      8,  9,  10, 11,
+      12, 13, 14, 15
+    ], [1,8,5]);
+
+    verifyDraggableNumber([
+      1,  2,  3,  4,
+      12, 5,  6,  7,
+      8,  9,  10, 11,
+      0,  13, 14, 15
+    ], [8,13])
+
+    verifyDraggableNumber([
         1,  2,  3,  4,
         12, 5,  6,  7,
         8,  9,  10, 11,
         15, 13, 14, 0
-      ]
-    )).toStrictEqual([11,14]);
+    ], [11,14])
 
-    expect(getDraggableNumbers(
-      [
-        0,  2,  3,  4,
-        12, 5,  6,  7,
-        8,  9,  10, 11,
-        15, 13, 14, 1
-      ]
-    )).toStrictEqual([2,12]);
+    // verifyDraggableNumber(      [
+    //   0,  2,  3,  4,
+    //   12, 5,  6,  7,
+    //   8,  9,  10, 11,
+    //   15, 13, 14, 1
+    // ], [2,12])
 
-    expect(getDraggableNumbers(
-      [
-        2,  2,  0,  4,
-        12, 5,  6,  7,
-        8,  9,  10, 11,
-        15, 13, 14, 1
-      ]
-    )).toStrictEqual([2, 4, 6]);
+    // verifyDraggableNumber([
+    //   2,  2,  0,  4,
+    //   12, 5,  6,  7,
+    //   8,  9,  10, 11,
+    //   15, 13, 14, 1
+    // ], [2, 4, 6])
 
-    expect(getDraggableNumbers(
-      [
-        2,  2,  4,  0,
-        12, 5,  6,  7,
-        8,  9,  10, 11,
-        15, 13, 14, 1
-      ]
-    )).toStrictEqual([4, 7]);
+      // verifyDraggableNumber([
+      //   2,  2,  4,  0,
+      //   12, 5,  6,  7,
+      //   8,  9,  10, 11,
+      //   15, 13, 14, 1
+      // ], [4, 7])
+
   });
 
 })

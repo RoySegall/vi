@@ -6,7 +6,13 @@ export const findIndexOfNumber = (numbers, numberToFind) => {
 
 export const getDraggableNumbers = (numbers) => {
   // This are the keys of the number, without any edge cases, can be draggable.
-  let draggableNumbersKeys = [-1, 1, 4, 4];
+
+  const allowDirection = {
+    up: -4,
+    down: 4,
+    right: 1,
+    left: -1,
+  };
 
   // Getting the location of the index.
   const zeroIndex = findIndexOfNumber(numbers, 0);
@@ -16,11 +22,27 @@ export const getDraggableNumbers = (numbers) => {
   // numbers above and on the sides can be dragged. If the zero is on the upper left corner only the numbers below and
   // on the right side can be dragged.
 
-  // todo: do it!
+  // We'll by getting the location on th y axis and the x axis.
+  const [xAxis, yAxis] = [zeroIndex % 4, Math.floor(zeroIndex / 4)];
 
-  return numbers.filter((_, index) => {
-    return draggableNumbersKeys.includes(index);
-  });
+  console.log('y', yAxis, 'x', xAxis);
+
+  if (yAxis === 0) {
+    delete allowDirection['top'];
+  }
+
+  if (yAxis === 3) {
+    delete allowDirection['down'];
+  }
+
+  if (xAxis === 3) {
+    delete allowDirection['right'];
+  }
+  if (xAxis === 0) {
+    delete allowDirection['left'];
+  }
+
+  return Object.values(allowDirection).map(item => numbers[zeroIndex + item]);
 };
 
 export const switchNumberWithZero = (numbers, number) => {
