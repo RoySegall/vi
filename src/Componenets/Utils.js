@@ -25,10 +25,10 @@ export const getDraggableNumbers = (numbers) => {
   // We'll by getting the location on th y axis and the x axis.
   const [xAxis, yAxis] = [zeroIndex % 4, Math.floor(zeroIndex / 4)];
 
-  console.log('y', yAxis, 'x', xAxis);
 
+  // Now, we need to remove the directions we can go based on the position on the X and Y axis.
   if (yAxis === 0) {
-    delete allowDirection['top'];
+    delete allowDirection['up'];
   }
 
   if (yAxis === 3) {
@@ -42,6 +42,7 @@ export const getDraggableNumbers = (numbers) => {
     delete allowDirection['left'];
   }
 
+  // Going over the allowed direction and return the value relative to the zero item.
   return Object.values(allowDirection).map(item => numbers[zeroIndex + item]);
 };
 
