@@ -1,14 +1,23 @@
 import "./app.scss";
-import {useState} from 'react';
+import {useState, useEffect} from 'react';
 import Tiles from "./Componenets/Tiles";
+import {isGameSolved, switchNumberWithZero} from "./Componenets/Utils"
 
 export default function App() {
-  const [numbers, setNumbers] = useState([
-    1,  2,  3,  4,
-    5,  6,  7,  0,
-    8,  9,  10, 11,
-    12, 13, 14, 15
-  ]);
+  const [numbers, setNumbers] = useState([]);
+
+  useEffect(() => {
+    console.log(isGameSolved(numbers));
+  }, [numbers]);
+
+  useEffect(() => {
+    setNumbers([
+      1,  2,  3,  4,
+      5,  6,  7,  8,
+      9,  10, 11, 12,
+      13, 14, 0, 15
+    ]);
+  }, []);
 
   function allowDrop(ev) {
     ev.preventDefault();
@@ -21,8 +30,9 @@ export default function App() {
   function drop(ev) {
     ev.preventDefault();
     const movedNumber = ev.dataTransfer.getData("number");
-    const currentNumber = ev.target.dataset.number;
-    setNumbers([1,2,3,4,5,6,7,11,8,9,10,0,12,13,14,15]);
+    const newNumbers = switchNumberWithZero(numbers, movedNumber);
+    const newArray = [].concat([], newNumbers);
+    setNumbers(newArray);
   }
 
   return <Tiles

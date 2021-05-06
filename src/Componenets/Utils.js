@@ -47,12 +47,11 @@ export const getDraggableNumbers = (numbers) => {
 };
 
 export const switchNumberWithZero = (numbers, number) => {
+  number = parseInt(number);
   const zeroIndex = findIndexOfNumber(numbers, 0);
   const getIndexOfNumber = findIndexOfNumber(numbers, number);
-
   numbers[zeroIndex] = number;
   numbers[getIndexOfNumber] = 0;
-
   return numbers;
 };
 
