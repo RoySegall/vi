@@ -9,6 +9,8 @@ jobs:
         with:
           node-version: '14.16.1'
       - name: Install modules
-        run: npm i
+        run: |
+          cd front
+          npm i
       - name: Run tests
         run: npm run test

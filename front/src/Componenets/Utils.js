@@ -6,7 +6,6 @@ export const findIndexOfNumber = (numbers, numberToFind) => {
 
 export const getDraggableNumbers = (numbers) => {
   // This are the keys of the number, without any edge cases, can be draggable.
-
   const allowDirection = {
     up: -4,
     down: 4,
