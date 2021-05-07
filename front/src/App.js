@@ -1,14 +1,16 @@
 import "./app.scss";
 import {useState, useEffect} from 'react';
-import Tiles from "./Componenets/Tiles";
+import Tiles from "./Componenets/Tiles/Tiles";
 import {backendURL} from "./config";
 import {isEmpty} from 'lodash';
 import axios from 'axios';
+import Winner from "./Componenets/Winnder/Winner";
 
 export default function App() {
   const [numbers, setNumbers] = useState(null);
   const [name, setName] = useState(null);
   const [nameRequired, setNameRequired] = useState(false);
+  const [showWinner, setShowWinner] = useState(false);
 
   const onClickHandler = async (e) => {
     setNameRequired(false);
@@ -22,10 +24,19 @@ export default function App() {
     setNumbers(numbers);
   };
 
-  const onSolveCallback = () => {};
+  const onSolveCallback = async ({movesNumber, gameStartDate}) => {
+    setShowWinner(true);
+
+    const currentDate = new Date();
+    const response = await axios.post(`${backendURL()}/result`, {
+      name, movesNumber, duration: ((currentDate - gameStartDate) / 1000)
+    });
+
+    console.log(response);
+  };
 
   return <div className="wrapper">
-
+    {showWinner && <Winner /> }
     {numbers ? <Tiles
       initialConfiguration={numbers}
       onSolveCallback={onSolveCallback}

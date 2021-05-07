@@ -26,9 +26,9 @@ app.get('/numbers', (req, res) => {
 app.post('/result', async (req, res) => {
 
   // todo: consider use a validation library.
-  const {name, moves, time} = req.body;
+  const {name, moves, duration} = req.body;
 
-  const {ops: [document]} = await createResult(client, req.body);
+  const {ops: [document]} = await createResult(client, {name, moves, duration});
   res.json({result: document});
 });
 

@@ -4,16 +4,24 @@ import "./tiles.scss";
 
 function drag(e) {
   e.dataTransfer.setData("number", e.target.dataset.number);
+  console.log('a');
 }
 
 export default function Tiles({initialConfiguration, onSolveCallback}) {
   const [numbers, setNumbers] = useState(initialConfiguration);
+  const [movesNumber, setMovesNumber] = useState(0);
+  const [gameStartDate, setGameStartDate] = useState(null);
   const draggableNumbers = getDraggableNumbers(numbers);
 
   useEffect(() => {
     if (isGameSolved(numbers)) {
-      onSolveCallback();
+      onSolveCallback({movesNumber, gameStartDate});
     }
+
+    if (!gameStartDate) {
+      setGameStartDate(new Date());
+    }
+
   }, [numbers]);
 
   const drop = (e) => {
@@ -30,7 +38,10 @@ export default function Tiles({initialConfiguration, onSolveCallback}) {
     {numbers.map((item, key) => <div
       data-number={item}
       draggable={draggableNumbers.includes(item)}
-      onDragStart={drag}
+      onDragStart={(e) => {
+        drag(e);
+        setMovesNumber(movesNumber + 1)
+      }}
       onDrop={drop}
       onDragOver={(e) => {e.preventDefault()}}
       key={key}

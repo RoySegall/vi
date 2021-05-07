@@ -1,0 +1,21 @@
+.winner {
+  position: absolute;
+  width: 30vw;
+  height: 30vw;
+  left: 35vw;
+  display: flex;
+  flex-direction: column;
+  text-align: center;
+  border: solid 1px var(--titleAndBorder);
+  background-color: white;
+  padding: 1em;
+  justify-content: space-evenly;
+
+  img {
+    height: 20vh;
+  }
+
+  h2 {
+    font-size: 2em;
+  }
+}
