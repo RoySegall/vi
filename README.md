@@ -2,6 +2,9 @@
 
 [![Tests](https://github.com/RoySegall/vi/actions/workflows/test-front.yaml/badge.svg)](https://github.com/RoySegall/vi/actions/workflows/test-front.yaml)
 
+![img.png](./pictures/welcome.png)
+![img.png](./pictures/game.png)
+
 ## Setting up development
 
 It's pretty simple, take a look:

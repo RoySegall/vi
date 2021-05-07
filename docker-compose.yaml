@@ -1,0 +1,23 @@
+services:
+  db:
+    image: mongo:4.4
+    volumes:
+      - ./backend/data:/data/db
+
+  backend:
+    build: ./backend
+    environment:
+      MONGO_URI: mongodb://db/results
+      DB_NAME: vi
+      PORT: 80
+    ports:
+      - "3001:80"
+    depends_on:
+      - db
+
+  frontend:
+    build: ./frontend
+    ports:
+      - "3000:80"
+    depends_on:
+      - backend
