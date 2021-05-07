@@ -13,4 +13,6 @@ jobs:
           cd front
           npm i
       - name: Run tests
-        run: npm run test
+        run: |
+          cd front
+          npm run test
