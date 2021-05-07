@@ -2,17 +2,19 @@ import express from 'express';
 import lodash from 'lodash';
 import bodyParser from 'body-parser';
 import cors from 'cors';
+
+import {config} from 'dotenv';
+
+const {shuffle} = lodash;
+const app = express();
+
 import {getMongoClient, getResults, createResult} from "./db.js";
-const {shuffle, isEmpty, some} = lodash;
-const app = express()
-const port = 3001;
 
-// parse application/x-www-form-urlencoded
+config();
+const port = process.env.PORT;
+
 app.use(bodyParser.urlencoded({ extended: false }))
-
-// parse application/json
 app.use(bodyParser.json());
-
 app.use(cors());
 
 let client;

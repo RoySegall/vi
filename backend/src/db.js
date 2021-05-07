@@ -2,12 +2,10 @@ import mongodb from 'mongodb';
 const {MongoClient} = mongodb;
 
 export async function getMongoClient() {
-  // todo: get from env.
-  const uri = "mongodb+srv://roy:6sgqxixud8sQi6L@cluster0.axcwi.mongodb.net/myFirstDatabase?retryWrites=true&w=majority";
-  const client = new MongoClient(uri);
+  const {MONGO_URI, DB_NAME} = process.env;
+  const client = new MongoClient(MONGO_URI);
   await client.connect();
-  // todo: get db name from env.
-  return client.db("vi");
+  return client.db(DB_NAME);
 }
 
 export async function getResults(client) {

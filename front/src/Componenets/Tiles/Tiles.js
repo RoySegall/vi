@@ -4,7 +4,6 @@ import "./tiles.scss";
 
 function drag(e) {
   e.dataTransfer.setData("number", e.target.dataset.number);
-  console.log('a');
 }
 
 export default function Tiles({initialConfiguration, onSolveCallback}) {
