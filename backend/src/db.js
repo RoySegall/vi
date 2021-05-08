@@ -13,7 +13,7 @@ export async function getResults(client) {
     .collection("results")
     .find()
     .sort({duration: 1, movesNumber: 1})
-    .limit(1)
+    .limit(10)
     .toArray();
 }
 

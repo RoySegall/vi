@@ -1,0 +1,40 @@
+.leader-board {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  height: 100%;
+  width: 100%;
+  align-items: stretch;
+
+  table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 2em;
+    margin-bottom: 2em;
+
+    thead {
+      text-transform: uppercase;
+      font-weight: bold;
+      color: var(--background);
+      background-color: var(--titleAndBorder);
+    }
+
+    tbody {
+      tr {
+         border-bottom: solid 1px var(--titleAndBorder);
+      }
+    }
+
+    td {
+      padding-top: .5em;
+      padding-bottom: .5em;
+    }
+  }
+
+  .go-back {
+    a {
+      color: var(--tileBorder);
+      text-decoration: none;
+    }
+  }
+}

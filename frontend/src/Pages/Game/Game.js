@@ -1,16 +1,27 @@
-import {useState} from 'react';
+import {useState, useEffect} from 'react';
 import {isEmpty} from "lodash";
 import axios from "axios";
 import {backendURL} from "config";
-import Winner from "Componenets/Winnder/Winner";
+import Winner from "Componenets/Winner/Winner";
 import Tiles from "Componenets/Tiles/Tiles";
 import Welcome from "Componenets/Welcome/Welcoms";
+import "./game.scss";
 
-export default function Game() {
+export default function Game({name, setName, restart = false}) {
   const [numbers, setNumbers] = useState(null);
-  const [name, setName] = useState(null);
   const [nameRequired, setNameRequired] = useState(false);
   const [showWinner, setShowWinner] = useState(false);
+
+  const getNumbers = async () => {
+    const {data: {numbers}} = await axios.get(`${backendURL()}/numbers`);
+    setNumbers(numbers);
+  }
+
+  useEffect(async () => {
+    if (restart) {
+      await getNumbers();
+    }
+  }, []);
 
   const startHandler = async (e) => {
     setNameRequired(false);
@@ -19,9 +30,7 @@ export default function Game() {
       setNameRequired(true);
       return;
     }
-
-    const {data: {numbers}} = await axios.get(`${backendURL()}/numbers`);
-    setNumbers(numbers);
+    await getNumbers();
   };
 
   const onSolveCallback = async ({movesNumber, gameStartDate}) => {
@@ -34,11 +43,11 @@ export default function Game() {
     });
   };
 
-  return <div className="wrapper">
+  return <>
     {showWinner && <Winner /> }
     {numbers ?
       <Tiles initialConfiguration={numbers} onSolveCallback={onSolveCallback}/> :
       <Welcome nameRequired={nameRequired} setName={setName} startHandler={startHandler} />
     }
-  </div>;
+  </>;
 }
