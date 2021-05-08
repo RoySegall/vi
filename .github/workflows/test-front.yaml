@@ -10,7 +10,7 @@ jobs:
           node-version: '14.16.1'
       - name: Install modules
         run: |
-          cd front
+          cd frontend
           npm i
       - name: Run tests
         run: |

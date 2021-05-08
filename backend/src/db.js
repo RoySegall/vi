@@ -9,9 +9,12 @@ export async function getMongoClient() {
 }
 
 export async function getResults(client) {
-  // todo: order by time and get the latest 10.
-  const cursor = client.collection("results").find();
-  return await cursor.toArray();
+  return await client
+    .collection("results")
+    .find()
+    .sort({duration: 1, movesNumber: 1})
+    .limit(1)
+    .toArray();
 }
 
 export async function createResult(client, result) {
