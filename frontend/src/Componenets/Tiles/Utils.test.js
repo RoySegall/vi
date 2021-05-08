@@ -1,5 +1,4 @@
 import {getDraggableNumbers, isGameSolved, findIndexOfNumber, switchNumberWithZero} from "./Utils";
-import {isEqual} from 'lodash';
 
 describe('Utils', () => {
 

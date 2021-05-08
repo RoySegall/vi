@@ -45,4 +45,13 @@ cd frontend
 npm run test
 ```
 
+If you are lazy, like me, you can wait to the CI to wait if the test has passed or not.
+
 ## Docker
+You can use docker to test it. Just run:
+
+```bash
+docker-compose up -d
+```
+
+After everything is ready go to http://localhost:3000 and you are ready to rock!
